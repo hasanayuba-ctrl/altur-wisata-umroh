@@ -42,16 +42,18 @@ export function PaketUmroh() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.paket-card', {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: 'top 80%',
-        }
+      const cards = gsap.utils.toArray('.paket-card');
+      cards.forEach((card: any) => {
+        gsap.from(card, {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+          }
+        });
       });
     }, sectionRef);
     return () => ctx.revert();
